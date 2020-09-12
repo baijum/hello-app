@@ -2,10 +2,14 @@ package main
 
 import (
 	"net/http"
+	"os"
 )
 
 func rootHandler(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Hello, World!"))
+	for _, pair := range os.Environ() {
+		w.Write([]byte(pair))
+		w.Write([]byte("\n"))
+	}
 }
 
 func main() {
